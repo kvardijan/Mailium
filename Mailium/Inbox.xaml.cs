@@ -1,8 +1,10 @@
 ﻿using Mailium.Data;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -29,15 +31,58 @@ namespace Mailium
             LoadMessagesFromBackend();
         }
 
-        private async void LoadMessagesFromBackend()
+        private async Task LoadMessagesFromBackend()
         {
-            var messages = new ObservableCollection<Mail>
-            {
-                new Mail { SenderEmail = "example@example.com", Title = "Hello", Content = "This is a test message", SentAt = DateTime.Now },
-                new Mail { SenderEmail = "another@example.com", Title = "Greetings", Content = "Another test message", SentAt = DateTime.Now }
-            };
+            //TODO: CHANGE TO REAL CLIENT ID
+            int clientId = 1;
 
-            lstMessages.ItemsSource = messages;
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    string apiUrl = "http://localhost:5294/Message/getInbox/" + clientId;
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+
+                        dynamic jsonResult = JsonConvert.DeserializeObject(responseBody);
+
+                        if (jsonResult.messages != null)
+                        {
+                            var messages = new ObservableCollection<Mail>();
+
+                            foreach (var jsonMessage in jsonResult.messages)
+                            {
+
+                                //TODO: DECRYPT TITLE AND CONTENT
+                                messages.Add(new Mail
+                                {
+                                    SenderEmail = jsonMessage.senderEmail,
+                                    Title = jsonMessage.title,
+                                    Content = jsonMessage.content,
+                                    SentAt = DateTime.Parse(jsonMessage.sentAt.ToString())
+                                });
+                            }
+
+                            lstMessages.ItemsSource = messages;
+                        }
+                        else
+                        {
+                            MessageBox.Show("No messages found.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("An error occurred. " + response.ReasonPhrase.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred. " + ex.Message);
+                }
+            }
         }
     }
 }
