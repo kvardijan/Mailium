@@ -10,8 +10,8 @@
         <StackPanel DockPanel.Dock="Left" Width="150" Background="LightGray">
             <Label HorizontalContentAlignment="Center" Content="Logged in as:"></Label>
             <Label x:Name="lblLoggedUser" HorizontalContentAlignment="Center" Content="Not logged in yet" Margin="0,0,0,20"></Label>
-            <Button x:Name="btnLogin" Content="Login"></Button>
-            <Button x:Name="btnRegistration" Content="Registration"></Button>
+            <Button x:Name="btnLogin" Content="Login" Click="btnLogin_Click"></Button>
+            <Button x:Name="btnRegistration" Content="Registration" Click="btnRegistration_Click"></Button>
             <Button x:Name="btnCompose" Content="Compose" Visibility="Hidden"></Button>
             <Button x:Name="btnInbox" Content="Inbox" Visibility="Hidden"></Button>
             <Button x:Name="btnLogout" Content="Logout" Visibility="Hidden"></Button>

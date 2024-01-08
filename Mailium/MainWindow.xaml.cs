@@ -24,5 +24,15 @@ namespace Mailium
         {
             InitializeComponent();
         }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            contentContainer.Content = new Login();
+        }
+
+        private void btnRegistration_Click(object sender, RoutedEventArgs e)
+        {
+            contentContainer.Content = new Registration();
+        }
     }
 }
