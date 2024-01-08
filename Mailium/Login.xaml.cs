@@ -51,6 +51,15 @@ namespace Mailium
             HttpResponseMessage response = await client.PostAsync($"{BaseUrl}/Auth/login", parameters);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
+                string responseContent = await response.Content.ReadAsStringAsync();
+                var responseJson = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseContent);
+                var user = new User
+                {
+                    Name = responseJson["name"],
+                    Email = responseJson["email"]
+                };
+                UserManager.SetCurrentUser(user);
+                EnableLoggedUserControls();
                 MessageBox.Show("Login success.");
                 // TODO: open inbox, remove message box
             }
@@ -58,6 +67,14 @@ namespace Mailium
             {
                 MessageBox.Show("Login failed. " + response.ReasonPhrase.ToString());
             }
+        }
+
+        private void EnableLoggedUserControls()
+        {
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.btnCompose.Visibility = Visibility.Visible;
+            mainWindow.btnInbox.Visibility = Visibility.Visible;
+            mainWindow.btnLogout.Visibility = Visibility.Visible;
         }
 
         private bool ValidateForm()
