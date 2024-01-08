@@ -19,7 +19,7 @@
         <Label Grid.Column="0" Grid.Row="0" Content="Email:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"></Label>
         <TextBox x:Name="txtEmail" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Width="250"></TextBox>
         <Label Grid.Column="0" Grid.Row="1" Content="Password:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"></Label>
-        <TextBox x:Name="txtPassword" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Width="250"></TextBox>
-        <Button x:Name="btnLogin" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Width="250"></Button>
+        <PasswordBox x:Name="txtPassword" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Width="250"></PasswordBox>
+        <Button x:Name="btnLogin" Click="btnLogin_Click" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Width="250"></Button>
     </Grid>
 </UserControl>
