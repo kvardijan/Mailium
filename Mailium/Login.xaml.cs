@@ -25,6 +25,7 @@ namespace Mailium
         private const string BaseUrl = "http://localhost:5294";
         private static readonly HttpClient client = new HttpClient();
         ContentControl _contentContainer;
+        private DHKeyExchange clientDH;
 
         public Login(ContentControl contentContainer)
         {
@@ -61,6 +62,7 @@ namespace Mailium
                 };
                 UserManager.SetCurrentUser(user);
                 EnableLoggedUserControls();
+                await CreateSharedSecretAsync();
                 _contentContainer.Content = new Inbox();
             }
             else
@@ -85,6 +87,30 @@ namespace Mailium
                 return false;
             }
             return true;
+        }
+
+        private async Task CreateSharedSecretAsync()
+        {
+            string sharedSecret = "";
+            clientDH = new DHKeyExchange();
+            string clientPublicKey = clientDH.GetClientPublicKey();
+            string serverPublicKey = await ExchangeKeys(clientPublicKey);
+            sharedSecret = clientDH.GenerateSharedSecret(serverPublicKey);
+            SharedSecretManager.SetSharedSecret(sharedSecret);
+        }
+
+        private async Task<string> ExchangeKeys(string clientPublicKey)
+        {
+
+            var publicKeyDTO = new { clientId = UserManager.GetCurrentUser().Id.ToString(), publicKey = clientPublicKey };
+            var json = JsonConvert.SerializeObject(publicKeyDTO);
+            var parameters = new StringContent(json, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PostAsync($"{BaseUrl}/Key/exchangeKeys", parameters);
+            response.EnsureSuccessStatusCode();
+
+            string serverPublicKey = await response.Content.ReadAsStringAsync();
+            return serverPublicKey;
         }
     }
 }

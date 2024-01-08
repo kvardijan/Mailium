@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,8 +22,6 @@ namespace Mailium
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly DHKeyExchange clientDH;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -56,7 +56,7 @@ namespace Mailium
             contentContainer.Content = new Inbox();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
         }

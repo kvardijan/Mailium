@@ -59,6 +59,7 @@
     <Compile Include="Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SharedSecretManager.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserManager.cs" />
     <Page Include="Login.xaml">
