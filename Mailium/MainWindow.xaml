@@ -6,7 +6,18 @@
         xmlns:local="clr-namespace:Mailium"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Left" Width="150">
+            <Label HorizontalContentAlignment="Center" Content="Logged in as:"></Label>
+            <Label HorizontalContentAlignment="Center" Content="Not logged in yet" Margin="0,0,0,20"></Label>
+            <Button Content="Login"></Button>
+            <Button Content="Registration"></Button>
+            <Button Content="Compose" Visibility="Hidden"></Button>
+            <Button Content="Inbox" Visibility="Hidden"></Button>
+            <Button Content="Logout" Visibility="Hidden"></Button>
+        </StackPanel>
+        <ContentControl DockPanel.Dock="Right" x:Name="contentContainer">
+
+        </ContentControl>
+    </DockPanel>
 </Window>
