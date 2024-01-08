@@ -7,14 +7,26 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListBox x:Name="lstMessages" Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="5*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Content="Inbox" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold"/>
+
+        <ListBox Grid.Row="1" x:Name="lstMessages" Padding="10" BorderThickness="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Path=SenderEmail}" />
-                        <TextBlock Text="{Binding Path=Title}" />
+                    <StackPanel Margin="0,0,0,20">
+                        <TextBlock Text="{Binding Path=Title}" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <WrapPanel Margin="0,0,0,5">
+                            <TextBlock Text="{Binding Path=SenderEmail}" Foreground="#848484" />
+                            <TextBlock Text=" - " Foreground="#848484" />
+                            <TextBlock Text="{Binding Path=SentAt}" Foreground="#848484" />
+                        </WrapPanel>
                         <TextBlock Text="{Binding Path=Content}" />
-                        <TextBlock Text="{Binding Path=SentAt}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
