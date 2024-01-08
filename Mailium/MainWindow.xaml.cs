@@ -52,5 +52,10 @@ namespace Mailium
         {
             contentContainer.Content = new Inbox();
         }
+
+        private void btnCompose_Click(object sender, RoutedEventArgs e)
+        {
+            contentContainer.Content = new Compose();
+        }
     }
 }
