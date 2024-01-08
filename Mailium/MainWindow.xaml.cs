@@ -40,7 +40,7 @@ namespace Mailium
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             DisableLoggedUserControls();
-            UserManager.SetCurrentUser(null);
+            UserManager.LogoutUser();
             contentContainer.Content = new Login(contentContainer);
         }
 
