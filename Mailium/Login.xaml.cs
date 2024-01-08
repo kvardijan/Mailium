@@ -55,6 +55,7 @@ namespace Mailium
                 var responseJson = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseContent);
                 var user = new User
                 {
+                    Id = int.Parse(responseJson["id"]),
                     Name = responseJson["name"],
                     Email = responseJson["email"]
                 };

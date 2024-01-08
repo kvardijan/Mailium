@@ -33,8 +33,7 @@ namespace Mailium
 
         private async Task LoadMessagesFromBackend()
         {
-            //TODO: CHANGE TO REAL CLIENT ID
-            int clientId = 1;
+            int clientId = UserManager.GetCurrentUser().Id;
 
             using (HttpClient client = new HttpClient())
             {
