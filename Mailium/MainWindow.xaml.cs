@@ -39,6 +39,7 @@ namespace Mailium
         {
             DisableLoggedUserControls();
             UserManager.SetCurrentUser(null);
+            contentContainer.Content = new Login(contentContainer);
         }
 
         private void DisableLoggedUserControls()
