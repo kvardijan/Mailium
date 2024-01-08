@@ -20,6 +20,8 @@ namespace Mailium
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly DHKeyExchange clientDH;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -52,6 +54,11 @@ namespace Mailium
         private void btnInbox_Click(object sender, RoutedEventArgs e)
         {
             contentContainer.Content = new Inbox();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
