@@ -27,12 +27,12 @@ namespace Mailium
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            contentContainer.Content = new Login();
+            contentContainer.Content = new Login(contentContainer);
         }
 
         private void btnRegistration_Click(object sender, RoutedEventArgs e)
         {
-            contentContainer.Content = new Registration();
+            contentContainer.Content = new Registration(contentContainer);
         }
     }
 }

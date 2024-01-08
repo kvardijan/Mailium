@@ -24,9 +24,11 @@ namespace Mailium
     {
         private const string BaseUrl = "http://localhost:5294";
         private static readonly HttpClient client = new HttpClient();
+        ContentControl _contentContainer;
 
-        public Login()
+        public Login(ContentControl contentContainer)
         {
+            _contentContainer = contentContainer;
             InitializeComponent();
         }
 
@@ -50,11 +52,11 @@ namespace Mailium
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 MessageBox.Show("Login success.");
-                //open inbox
+                // TODO: open inbox, remove message box
             }
             else
             {
-                MessageBox.Show("Login failed." + response.ReasonPhrase.ToString());
+                MessageBox.Show("Login failed. " + response.ReasonPhrase.ToString());
             }
         }
 
