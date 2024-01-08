@@ -44,12 +44,13 @@ namespace Mailium
 
         private async Task SendEmail(string recipient, string subject, string content)
         {
-            //TODO: KRIPTIRAJ
-            string encryptedContent = content;
-            string encryptedSubject = subject;
+            string encryptedContent = EncryptionManager.EncryptSymmetric(content);
+            string encryptedSubject = EncryptionManager.EncryptSymmetric(subject);
             int senderId = UserManager.GetCurrentUser().Id;
+            DateTime now = DateTime.Now;
+            string formattedDateTime = now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
 
-            var messageDTO = new { senderId = senderId, receiverEmail = recipient, title = encryptedSubject, content = encryptedContent, sentAt = DateTime.Now.ToString() };
+            var messageDTO = new { senderId = senderId, receiverEmail = recipient, title = encryptedSubject, content = encryptedContent, sentAt = formattedDateTime };
 
             var json = JsonConvert.SerializeObject(messageDTO);
             var mailContent = new StringContent(json, Encoding.UTF8, "application/json");
@@ -59,14 +60,14 @@ namespace Mailium
                 HttpResponseMessage response = await client.PostAsync("http://localhost:5294/Message/send", mailContent);
                 if(response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show("Poruka poslana!");
+                    MessageBox.Show("Mail sent!");
                     txtRecipient.Clear();
                     txtSubject.Clear();
                     txtContent.Clear();
                 }
                 else
                 {
-                    MessageBox.Show("Poruka nije poslana!");
+                    MessageBox.Show("Mail failed to sent! " + response.ReasonPhrase.ToString());
                 }
             }
         }

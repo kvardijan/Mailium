@@ -54,13 +54,14 @@ namespace Mailium
 
                             foreach (var jsonMessage in jsonResult.messages)
                             {
+                                string title = jsonMessage.title;
+                                string content = jsonMessage.content;
 
-                                //TODO: DECRYPT TITLE AND CONTENT
                                 messages.Add(new Mail
                                 {
                                     SenderEmail = jsonMessage.senderEmail,
-                                    Title = jsonMessage.title,
-                                    Content = jsonMessage.content,
+                                    Title = EncryptionManager.DecryptSymmetric(Convert.FromBase64String(title), clientId.ToString()),
+                                    Content = EncryptionManager.DecryptSymmetric(Convert.FromBase64String(content), clientId.ToString()),
                                     SentAt = DateTime.Parse(jsonMessage.sentAt.ToString())
                                 });
                             }
