@@ -34,5 +34,18 @@ namespace Mailium
         {
             contentContainer.Content = new Registration(contentContainer);
         }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            DisableLoggedUserControls();
+            UserManager.SetCurrentUser(null);
+        }
+
+        private void DisableLoggedUserControls()
+        {
+            btnCompose.Visibility = Visibility.Collapsed;
+            btnInbox.Visibility = Visibility.Collapsed;
+            btnLogout.Visibility = Visibility.Collapsed;
+        }
     }
 }
