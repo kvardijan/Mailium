@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -38,7 +40,8 @@ namespace Mailium
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             DisableLoggedUserControls();
-            UserManager.SetCurrentUser(null);
+            UserManager.LogoutUser();
+            contentContainer.Content = new Login(contentContainer);
         }
 
         private void DisableLoggedUserControls()
@@ -56,6 +59,11 @@ namespace Mailium
         private void btnCompose_Click(object sender, RoutedEventArgs e)
         {
             contentContainer.Content = new Compose();
+        }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

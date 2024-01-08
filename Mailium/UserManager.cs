@@ -18,6 +18,15 @@ namespace Mailium
         public static void SetCurrentUser(User user)
         {
             _currentUser = user;
+            MainWindow mainWindow = (MainWindow)App.Current.MainWindow;
+            mainWindow.lblLoggedUser.Content = user?.Name;
+        }
+
+        public static void LogoutUser()
+        {
+            _currentUser = null;
+            MainWindow mainWindow = (MainWindow)App.Current.MainWindow;
+            mainWindow.lblLoggedUser.Content = "Not logged in yet";
         }
 
         public static User GetCurrentUser()
