@@ -13,7 +13,7 @@
             <Button x:Name="btnLogin" Content="Login" Click="btnLogin_Click"></Button>
             <Button x:Name="btnRegistration" Content="Registration" Click="btnRegistration_Click"></Button>
             <Button x:Name="btnCompose" Content="Compose" Visibility="Hidden"></Button>
-            <Button x:Name="btnInbox" Content="Inbox" Visibility="Hidden"></Button>
+            <Button x:Name="btnInbox" Content="Inbox" Visibility="Hidden" Click="btnInbox_Click"></Button>
             <Button x:Name="btnLogout" Click="btnLogout_Click" Content="Logout" Visibility="Hidden"></Button>
         </StackPanel>
         <ContentControl DockPanel.Dock="Right" x:Name="contentContainer">

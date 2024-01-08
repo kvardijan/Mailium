@@ -60,8 +60,7 @@ namespace Mailium
                 };
                 UserManager.SetCurrentUser(user);
                 EnableLoggedUserControls();
-                MessageBox.Show("Login success.");
-                // TODO: open inbox, remove message box
+                _contentContainer.Content = new Inbox();
             }
             else
             {

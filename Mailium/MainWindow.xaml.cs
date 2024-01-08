@@ -47,5 +47,10 @@ namespace Mailium
             btnInbox.Visibility = Visibility.Collapsed;
             btnLogout.Visibility = Visibility.Collapsed;
         }
+
+        private void btnInbox_Click(object sender, RoutedEventArgs e)
+        {
+            contentContainer.Content = new Inbox();
+        }
     }
 }
