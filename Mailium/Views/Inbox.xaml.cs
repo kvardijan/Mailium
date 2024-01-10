@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -65,6 +66,8 @@ namespace Mailium
                                     SentAt = DateTime.Parse(jsonMessage.sentAt.ToString())
                                 });
                             }
+
+                            messages = new ObservableCollection<Mail>(messages.Reverse());
 
                             lstMessages.ItemsSource = messages;
                         }

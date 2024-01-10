@@ -52,7 +52,6 @@ namespace Mailium
             HttpResponseMessage response = await client.PostAsync($"{BaseUrl}/Auth/register", parameters);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                MessageBox.Show("Registration success.");
                 _contentContainer.Content = new Login(_contentContainer);
             }
             else

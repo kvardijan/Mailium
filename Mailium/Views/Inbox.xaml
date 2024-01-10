@@ -26,7 +26,7 @@
                             <TextBlock Text=" - " Foreground="#848484" />
                             <TextBlock Text="{Binding Path=SentAt}" Foreground="#848484" />
                         </WrapPanel>
-                        <TextBlock Text="{Binding Path=Content}" />
+                        <TextBlock TextWrapping="Wrap" MaxWidth="580" Text="{Binding Path=Content}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
